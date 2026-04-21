@@ -1,0 +1,380 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #13131a;
+  --surface2: #1c1c27;
+  --border: rgba(255,255,255,0.08);
+  --accent: #6c63ff;
+  --accent2: #a78bfa;
+  --text: #f0f0f8;
+  --text-muted: #8888aa;
+  --success: #34d399;
+  --error: #f87171;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 60px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient glow background */
+.bg-glow {
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse at center, rgba(108,99,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 860px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 64px 0 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.logo-icon { font-size: 2rem; }
+
+.logo-text {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.logo-accent {
+  color: var(--accent2);
+  margin-left: 4px;
+}
+
+.tagline {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* Search */
+.search-section {
+  margin-bottom: 40px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+  max-width: 480px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.2);
+}
+
+.zip-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 16px 24px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  color: var(--text);
+  letter-spacing: 2px;
+}
+
+.zip-input::placeholder {
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  border: none;
+  padding: 14px 24px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 0 50px 50px 0;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.search-btn:hover { background: #7c74ff; }
+.search-btn:active { transform: scale(0.97); }
+
+.btn-icon { font-size: 1.1rem; }
+
+.input-hint {
+  font-size: 0.85rem;
+  color: var(--error);
+  min-height: 20px;
+}
+
+/* State cards */
+.state-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.state-icon { font-size: 2.5rem; }
+
+.hidden { display: none !important; }
+
+/* Spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Theater cards */
+.theater-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.theater-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  animation: fadeUp 0.4s ease both;
+}
+
+.theater-card:nth-child(2) { animation-delay: 0.08s; }
+.theater-card:nth-child(3) { animation-delay: 0.16s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.theater-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.theater-info { flex: 1; }
+
+.theater-rank {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent2);
+  margin-bottom: 4px;
+}
+
+.theater-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.theater-address {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.theater-distance {
+  background: rgba(108,99,255,0.15);
+  color: var(--accent2);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 50px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Schedule */
+.theater-schedule {
+  padding: 16px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.day-group {}
+
+.day-label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.day-name {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.day-date {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.day-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.movie-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.movie-poster {
+  width: 56px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: var(--surface2);
+}
+
+.movie-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.movie-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.movie-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.imax-badge {
+  background: linear-gradient(135deg, #6c63ff, #a78bfa);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.times-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.time-chip {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 50px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.time-chip:hover {
+  background: rgba(108,99,255,0.2);
+  border-color: var(--accent);
+}
+
+/* Footer */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header { padding: 40px 0 28px; }
+  .logo-text { font-size: 1.7rem; }
+  .theater-header { flex-direction: column; }
+  .theater-distance { align-self: flex-start; }
+  .theater-schedule { padding: 14px 16px 18px; }
+  .theater-header { padding: 16px 16px 14px; }
+}
