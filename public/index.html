@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMAX Near Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=2" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <main class="container">
+    <header>
+      <div class="logo">
+        <span class="logo-icon">🎬</span>
+        <span class="logo-text">IMAX<span class="logo-accent">Near Me</span></span>
+      </div>
+      <p class="tagline">Find IMAX showtimes at the 3 closest theaters — next 3 days</p>
+    </header>
+
+    <section class="search-section">
+      <form id="searchForm" class="search-form" novalidate>
+        <div class="input-group">
+          <input
+            type="text"
+            id="zipInput"
+            class="zip-input"
+            placeholder="Enter ZIP code"
+            maxlength="5"
+            inputmode="numeric"
+            pattern="\d{5}"
+            aria-label="US ZIP code"
+            autocomplete="postal-code"
+          />
+          <button type="submit" class="search-btn" aria-label="Search">
+            <span class="btn-text">Search</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </div>
+        <p class="input-hint" id="inputHint" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="results" class="results-section" aria-live="polite" aria-label="Showtime results">
+      <div id="loadingState" class="state-card loading-state hidden">
+        <div class="spinner"></div>
+        <p>Finding IMAX theaters near you...</p>
+      </div>
+
+      <div id="emptyState" class="state-card empty-state hidden">
+        <span class="state-icon">🎭</span>
+        <p id="emptyMessage">No IMAX showtimes found near this ZIP code for the next 7 days.</p>
+      </div>
+
+      <div id="errorState" class="state-card error-state hidden">
+        <span class="state-icon">⚠️</span>
+        <p id="errorMessage">Something went wrong. Please try again.</p>
+      </div>
+
+      <div id="theaterList" class="theater-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Showtime data via Google · Powered by SerpAPI</p>
+  </footer>
+
+  <script src="app.js?v=2"></script>
+</body>
+</html>
